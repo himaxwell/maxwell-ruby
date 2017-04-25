@@ -1,3 +1,5 @@
+require 'active_support/core_ext/hash/indifferent_access'
+
 module Maxwell
   class Client
     class << self
@@ -78,8 +80,7 @@ module Maxwell
                 :endpoint
 
     def self.perform(path, request_method, opts = {})
-      if opts[:email] && opts[:password]
-      end
+      opts = HashWithIndifferentAccess.new(opts)
 
       client = ::Maxwell::Client.new(
         body: opts[:body].to_json,
