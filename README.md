@@ -1,15 +1,13 @@
-# Maxwell::Ruby
+# Maxwell Ruby
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/maxwell/ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ruby bindings for the Maxwell API
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'maxwell-ruby'
+gem 'maxwell-ruby', git: 'https://github.com/himaxwell/maxwell-ruby.git'
 ```
 
 And then execute:
@@ -22,7 +20,39 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After gem installation is complete, the easiest way to get setup is to add an initializer, setting the `base_url`
+
+```ruby
+require 'maxwell'
+
+Maxwell::Client.base_url = Rails.application.secrets.maxwell_base_api_url
+```
+
+If you've been supplied an API key, you can also set that in the initializer
+
+```ruby
+require 'maxwell'
+
+Maxwell::Client.base_url = Rails.application.secrets.maxwell_base_api_url
+Maxwell::Client.token = Rails.application.secrets.maxwell_api_key
+```
+
+If you haven't been supplied an API key, the alternative is to authenticate requests with a `JWT`
+
+```ruby
+require 'maxwell'
+
+Maxwell::Client.base_url = Rails.application.secrets.maxwell_base_api_url
+
+res = Maxwell::Client.authenticate({ email: "example@example.com", password: 'password' })
+auth_hash = JSON.parse(res.body)
+auth_hash
+=> { "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjYwLCJ0eXBlIjoiVXNlciIsImV4cCI6MTQ5MzE0OTg1OX0.guHsHyN0wETey_8mXOUfRRPsdcYLduk1bVPqk0hNbvE" }
+
+Maxwell::Client.get('/api_endpoint', auth_hash)
+```
+
+Please inquire if you'd like access to our API documentation.
 
 ## Development
 
