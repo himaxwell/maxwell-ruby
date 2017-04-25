@@ -18,7 +18,10 @@ module Maxwell
 
     def self.authenticate(opts = {})
       if opts[:email] && opts[:password]
-        auth_opts = { email: opts[:email], password: opts[:password] }
+        auth_opts = {
+          email: opts.fetch(:email, ''),
+          password: opts.fetch(:password, ''),
+        }
 
         self.post('/auth', { body: auth_opts })
       end

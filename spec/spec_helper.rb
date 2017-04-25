@@ -1,2 +1,8 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "maxwell/ruby"
+require 'rspec'
+require 'webmock/rspec'
+require 'pry'
+
+require 'support/config_helper'
+
+require "maxwell"
