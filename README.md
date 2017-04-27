@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-After gem installation is complete, the easiest way to get setup is to add an initializer, setting the `base_url`
+After gem installation is complete, the easiest way to get setup is to add an initializer, setting the `env`
 
 ```ruby
 require 'maxwell'
