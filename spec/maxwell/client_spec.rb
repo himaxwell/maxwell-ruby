@@ -10,7 +10,7 @@ describe Maxwell::Client do
     let(:args) { { email: 'example@example.com', password: 'password' } }
 
     before do
-      stub_request(:post, "https://example.com/api/auth").
+      stub_request(:post, "https://maxwell-staging.herokuapp.com/api/v1/auth").
          with(:body => "{\"email\":\"example@example.com\",\"password\":\"password\"}",
               :headers => {'Accept'=>'application/vnd.himaxwell.com; version=1,application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
          to_return(:status => 204, :body => {token: 'sometoken'}.to_json, :headers => {})
@@ -29,7 +29,7 @@ describe Maxwell::Client do
 
   describe ".get" do
     before do
-      stub_request(:get, "https://example.com/api/loan_files/active_loan_volume").
+      stub_request(:get, "https://maxwell-staging.herokuapp.com/api/v1/loan_files/active_loan_volume").
          with(:headers => {'Accept'=>'application/vnd.himaxwell.com; version=1,application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Bearer sometoken', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
          to_return(:status => 200, :body => "{\"active_loan_volume\":\"$0.00\"}", :headers => {})
     end
@@ -50,7 +50,7 @@ describe Maxwell::Client do
 
   describe ".post" do
     before do
-      stub_request(:post, "https://example.com/api/loan_files").
+      stub_request(:post, "https://maxwell-staging.herokuapp.com/api/v1/loan_files").
          with(:body => "null",
               :headers => {'Accept'=>'application/vnd.himaxwell.com; version=1,application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Bearer sometoken', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
          to_return(:status => 204, :body => "{\"loanFiles\":[]}", :headers => {})
@@ -72,7 +72,7 @@ describe Maxwell::Client do
 
   describe ".put" do
     before do
-      stub_request(:put, "https://example.com/api/loan_files/1").
+      stub_request(:put, "https://maxwell-staging.herokuapp.com/api/v1/loan_files/1").
          with(body: "null",
               headers: {'Accept'=>'application/vnd.himaxwell.com; version=1,application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Bearer sometoken', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
          to_return(status: 200, body: "{\"id\":1}", headers: {})
@@ -94,7 +94,7 @@ describe Maxwell::Client do
 
   describe ".delete" do
     before do
-      stub_request(:delete, "https://example.com/api/loan_files/1").
+      stub_request(:delete, "https://maxwell-staging.herokuapp.com/api/v1/loan_files/1").
          with(body: "null",
               headers: {'Accept'=>'application/vnd.himaxwell.com; version=1,application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Bearer sometoken', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
          to_return(status: 200, body: "{\"id\":1}", headers: {})
@@ -137,7 +137,7 @@ describe Maxwell::Client do
 
     context "with token" do
       before do
-        stub_request(:get, "https://example.com/api/loan_files/active_loan_volume").
+        stub_request(:get, "https://maxwell-staging.herokuapp.com/api/v1/loan_files/active_loan_volume").
           with(:headers => {'Accept'=>'application/vnd.himaxwell.com; version=1,application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Token apikey', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
           to_return(:status => 200, :body => "{\"active_loan_volume\":\"$0.00\"}", :headers => {})
 
@@ -159,7 +159,7 @@ describe Maxwell::Client do
 
     context "with jwt" do
       before do
-        stub_request(:get, "https://example.com/api/loan_files/active_loan_volume").
+        stub_request(:get, "https://maxwell-staging.herokuapp.com/api/v1/loan_files/active_loan_volume").
           with(:headers => {'Accept'=>'application/vnd.himaxwell.com; version=1,application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Authorization'=>'Bearer sometoken', 'Content-Type'=>'application/json', 'User-Agent'=>'Ruby'}).
           to_return(:status => 200, :body => "{\"active_loan_volume\":\"$0.00\"}", :headers => {})
       end

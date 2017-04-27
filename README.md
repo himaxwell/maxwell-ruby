@@ -25,7 +25,7 @@ After gem installation is complete, the easiest way to get setup is to add an in
 ```ruby
 require 'maxwell'
 
-Maxwell::Client.base_url = Rails.application.secrets.maxwell_base_api_url
+Maxwell::Client.env = :sandbox
 ```
 
 If you've been supplied an API key, you can also set that in the initializer
@@ -33,7 +33,7 @@ If you've been supplied an API key, you can also set that in the initializer
 ```ruby
 require 'maxwell'
 
-Maxwell::Client.base_url = Rails.application.secrets.maxwell_base_api_url
+Maxwell::Client.env = :sandbox
 Maxwell::Client.token = Rails.application.secrets.maxwell_api_key
 ```
 
@@ -42,7 +42,7 @@ If you haven't been supplied an API key, the alternative is to authenticate requ
 ```ruby
 require 'maxwell'
 
-Maxwell::Client.base_url = Rails.application.secrets.maxwell_base_api_url
+Maxwell::Client.env = :sandbox
 
 res = Maxwell::Client.authenticate({ email: "example@example.com", password: 'password' })
 auth_hash = JSON.parse(res.body)

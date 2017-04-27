@@ -3,12 +3,12 @@ require 'active_support/core_ext/hash/indifferent_access'
 module Maxwell
   class Client
     class << self
-      attr_accessor :base_url,
+      attr_accessor :env,
                     :token
     end
 
     def initialize(opts = {})
-      @base_url       = Maxwell::Client.base_url || opts.fetch(:base_url) { missing_argument(:base_url) }
+      @env            = Maxwell::Client.env || opts.fetch(:env) { missing_argument(:env) }
       @token          = Maxwell::Client.token || opts.fetch(:token) { nil }
       @jwt            = opts.fetch(:jwt, nil)
       @body           = opts.fetch(:body, "")
@@ -75,7 +75,7 @@ module Maxwell
 
     private
 
-    attr_reader :base_url,
+    attr_reader :env,
                 :token,
                 :jwt,
                 :body,
@@ -93,6 +93,13 @@ module Maxwell
       )
 
       client.perform
+    end
+
+    def base_url
+      case env
+      when :production then "https://himaxwell.com/api/v1"
+      when :sandbox then "https://maxwell-staging.herokuapp.com/api/v1"
+      end
     end
 
     def auth_uri?
