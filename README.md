@@ -1,6 +1,6 @@
 # Maxwell Ruby
 
-![Circle CI badge](https://circleci.com/gh/himaxwell/maxwell-ruby.png?circle-token=39a91babbbfd35e8c6d1fd5f2d3f703cdc196850)
+[![CircleCI](https://circleci.com/gh/himaxwell/maxwell-ruby/tree/master.svg?style=svg)](https://circleci.com/gh/himaxwell/maxwell-ruby/tree/master)
 
 Ruby bindings for the Maxwell API
 
